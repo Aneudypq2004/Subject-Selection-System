@@ -16,7 +16,7 @@ function App() {
 
   useEffect(() => {
 
-    fetch('/src/data/db.json')
+    fetch('/data/db.json')
       .then(datas => datas.json())
       .then(datos => setData(datos))
 

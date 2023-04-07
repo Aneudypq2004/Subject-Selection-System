@@ -9,7 +9,7 @@
 
 To visit the project [here](https://selectionsystem.netlify.app)
 
-To use and to practice with the project follow this steps
+To use and practice with the project follow these steps
 
 1. Download the zip
 2. Open the folder with Visual Studio Code or your favorite editor

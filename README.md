@@ -38,4 +38,4 @@ To use and to practice with the project follow this steps
         </div >
 ```
 
-Made with :love: by [aneudypq]()
+Made with :heart: by [aneudypq]()

@@ -14,7 +14,7 @@ function App() {
 
   //UseEffect
 
-  useEffect(() => {
+  useEffect( () => {
 
     fetch('/data/db.json')
       .then(datas => datas.json())

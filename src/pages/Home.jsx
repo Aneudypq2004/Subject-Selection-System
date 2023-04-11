@@ -43,9 +43,9 @@ const Home = () => {
         <>
             <Header />
 
-            <main className='md:p-6'>
+            <main className='md:p-6 '>
 
-                <div className="bg-slate w-full shadow-2xl  shadow-indigo-900 md:p-8">
+                <div className="bg-slate w-full shadow-2xl  shadow-indigo-900 p-4 md:p-8">
 
                     <div className='flex justify-between place-items-center'>
                         <select

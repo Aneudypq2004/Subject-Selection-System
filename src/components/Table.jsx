@@ -4,9 +4,10 @@ import { useEffect } from 'react';
 
 function Table() {
 
-  const { cuatrimestre, cuatrimestreActual, handleSelect } = useApp();
+  const { cuatrimestre, cuatrimestreActual, handleSelect, subjetctSelect } = useApp();
 
   const [data, setData] = useState([]);
+
 
   useEffect(() => {
 
@@ -16,7 +17,14 @@ function Table() {
 
     }
 
-  }, [cuatrimestre])
+  }, [cuatrimestre]);
+
+
+  const verifyIs = id => subjetctSelect.some(subject => subject.id == id)
+
+
+
+
 
   return (
     <>
@@ -43,7 +51,6 @@ function Table() {
           {data && data.map(cuatrimestreData => (
 
             <tr className='hover:bg-amber-100 cursor-pointer'
-
               key={cuatrimestreData.id}>
 
               <td>{cuatrimestreData.id}</td>
@@ -55,11 +62,16 @@ function Table() {
 
                 <button type='button'
 
-                  onClick={() => handleSelect(cuatrimestreData.id)}
+                  onClick={() => handleSelect(cuatrimestreData)}
 
-                  className='p-2 text-white bg-indigo-600 font-bold uppercase rounded-sm hover:bg-indigo-800'>
-                  Select
+                  className={`
 
+                  p-2 text-white  font-bold uppercase rounded-sm 
+                  ${verifyIs(cuatrimestreData.id) ? 'bg-red-600 hover:bg-red-800' : 'bg-indigo-600 hover:bg-indigo-800'}                  
+                  `}>
+
+                  {verifyIs(cuatrimestreData.id) ? 'Delete' : 'Select'}
+                  
                 </button>
 
               </td>

@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react';
+
+
+
 import useApp from "../hooks/useApp";
-
-
 import Table from "../components/Table";
 import Header from "../components/Header";
+import formatMoney from '../helpers/FormatMoney';
 
 
 const Home = () => {
 
-    const { data, setData, cuatrimestreActual, setCuatrimetreActual, setCuatrimestre } = useApp();
+    const { data, setData, cuatrimestreActual, setCuatrimetreActual, setCuatrimestre, maxCredit, total } = useApp();
 
     //UseEffect
 
@@ -41,7 +43,7 @@ const Home = () => {
         <>
             <Header />
 
-            <main className='p-6'>
+            <main className='md:p-6'>
 
                 <div className="bg-slate w-full shadow-2xl  shadow-indigo-900 p-8">
 
@@ -61,15 +63,21 @@ const Home = () => {
 
                         </select>
 
-                        <p>Credit 25 : 25</p>
-                        <p>12000$</p>
+                        {/* Price total and credit total */}
+
+
+                        <div className='relative grid place-items-center'>
+                            <p className={`absolute opacity-0 hover:opacity-100 -top-6 bottom-0 left-0 right-0 font-bold uppercase transition-all duration-300`}>Credit</p>
+                            <p className={`font-bold text-xl ${maxCredit >= 25 ? 'text-red-600' : ' text-indigo-600'}`}>
+                            {maxCredit}</p>
+                        </div>
+
+                        <div className='relative grid place-items-center'>
+                            <p className='absolute opacity-0 hover:opacity-100 -top-6 bottom-0 left-0 right-0 font-bold uppercase transition-all duration-300' >Total</p>
+                            <p className=' font-bold text-xl text-indigo-600'>{formatMoney(total)}</p>
+                        </div>
 
                     </div>
-
-
-
-
-
 
                     <Table />
 

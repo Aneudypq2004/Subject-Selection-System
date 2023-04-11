@@ -1,5 +1,6 @@
 import { createContext, useEffect } from "react";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const AppContext = createContext();
 
@@ -10,8 +11,8 @@ const AppProvider = ({ children }) => {
     const [cuatrimestreActual, setCuatrimetreActual] = useState(1);
     const [cuatrimestre, setCuatrimestre] = useState([]);
     const [subjetctSelect, setSubjectSelect] = useState([]);
-    const [maxCredit, setMaxCredit] = useState(0)
-
+    const [maxCredit, setMaxCredit] = useState(0);
+    const [total, setTotal] = useState(0);
 
     useEffect(() => {
 
@@ -25,22 +26,62 @@ const AppProvider = ({ children }) => {
     }, [cuatrimestreActual]);
 
 
-    const handleSelect = id => {
+    const handleSelect = subject => {
 
-        const dataSelect = Object.values(cuatrimestre)[0];
+        const data = subjetctSelect.some(subjec => subjec.id === subject.id);
 
-        const select = dataSelect.filter(subject => subject.id == id);
+        if (data) {
 
-        
+            setMaxCredit(maxCredit - subject.credito);
 
-        // setSubjectSelect(...subjetctSelect, select);
+            if (subject.id.split('-')[0].toLowerCase().startsWith('ing')) {
 
+                setTotal(total - 4000);
+
+            } else {
+                setTotal(total - (subject.credito * 520));
+            }
+
+            const newSubjects = subjetctSelect.filter(data => data.id !== subject.id)
+
+            setSubjectSelect(newSubjects)
+
+            toast.info('DELETED SUCCESSFULLY')
+
+            return
+        }
+
+
+        const response = handleCalcTotal(subject);
+
+        if (!response) return
+        setSubjectSelect([...subjetctSelect, subject]);
     }
 
+    const handleCalcTotal = subject => {
 
+        if ((subject.credito + maxCredit) > 25) {
 
+            toast.error('THE MAX OF CREDIT IS 25')
 
+            return false
+        }
 
+        setMaxCredit(maxCredit + subject.credito);
+
+        //Know which subject is English, that must be 4000
+
+        if (subject?.id.toLowerCase().split('-')[0].startsWith('ing')) {
+            setTotal(total + 4000);
+        } else {
+            setTotal(total + (subject.credito * 520));
+        }
+
+        toast.success('ADDED SUCCESSFULLY');
+
+        return true
+
+    }
 
     return (
         <AppContext.Provider
@@ -52,7 +93,10 @@ const AppProvider = ({ children }) => {
                 setCuatrimetreActual,
                 setCuatrimestre,
                 cuatrimestre,
-                handleSelect
+                handleSelect,
+                maxCredit,
+                total,
+                subjetctSelect
 
             }}>
             {children}

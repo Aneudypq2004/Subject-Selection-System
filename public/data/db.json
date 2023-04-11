@@ -19,7 +19,7 @@
             {
                 "name": "Redacción Castellana",
                 "id": "ESP-101",
-                "credito": 3
+                "credito": 4
             },
             {
                 "name": "Pre-cálculo",
@@ -219,6 +219,7 @@
                 "Pre-requisitos": "TDS-102, TDS-003"
             },
             {
+                "id":"ELC-001",
                 "name": "Electiva",
                 "credito": 3
             }
@@ -262,6 +263,7 @@
                 "Pre-requisitos": "ING-004"
             },
             {
+                "id": "ELC-102",
                 "name": "Electiva",
                 "credito": 3
             }

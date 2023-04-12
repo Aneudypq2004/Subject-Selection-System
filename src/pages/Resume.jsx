@@ -90,27 +90,10 @@ function Resume() {
               <img className='rotate-180 ' src="https://img.icons8.com/ios/50/null/arrow--v1.png" />
             </Link>
 
-            <button onClick={handleViewPdf} className='px-8 py-4 font-bold text-white bg-indigo-600 rounded-lg hover:bg-indigo-800 transition-all duration-500'> View
-
-            </button>
+            <PDFDownloadLink document={<ResumePdf subjetctSelect={subjetctSelect} total={total} />} fileName='Test.pdf'>
+              <button onClick={handleViewPdf} className='px-8 py-4 font-bold text-white bg-indigo-600 rounded-lg hover:bg-indigo-800 transition-all duration-500'> View </button>          </PDFDownloadLink>
 
           </div>
-
-          {view ? (
-
-
-            <PDFViewer style={{ width: '100%', height: '100vh', position: 'absolute', top: '0', right: '0' , bottom: '0' }}>
-              <ResumePdf subjetctSelect={subjetctSelect} total={total} />
-            </PDFViewer>
-
-
-          ) : null}
-
-
-
-         
-
-          
 
 
         </div>

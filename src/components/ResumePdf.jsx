@@ -4,85 +4,102 @@ import useApp from '../hooks/useApp'
 import formatMoney from '../helpers/FormatMoney';
 import { Link } from 'react-router-dom'
 
+import logo from '/logo.png'
+
 
 //Pdf
-import { Document, Text, Page, View, StyleSheet} from '@react-pdf/renderer';
+import { Document, Text, Page, View, StyleSheet, Image } from '@react-pdf/renderer';
 
 
+function ResumePdf({ subjetctSelect, total }) {
 
-function ResumePdf() {
+    const handleMoney = (amount, id) => {
 
-    const { subjetctSelect, total, maxCredit } = useApp();
+        if (amount == 0 && id.split('-')[0].toLowerCase().startsWith('ing')) {
+          return formatMoney(4000)
+        }
+    
+        return formatMoney(amount * 520)
+    
+      }
 
-    const handleMoney = amount => {
+    const styles = StyleSheet.create({
+        body: {
+            backgroundColor: "",
+            padding: '1rem'
 
-        if (amount == 0) {
-            return formatMoney(4000)
+        },
+
+        title: {
+            color: 'rgb(49 46 129)',
+            textAlign: 'center',
+            fontSize: '3rem',
+
+        },
+
+        page: {
+            padding: '40px',
+            width: '100%',
+            backgroundColor: 'rgb(243 244 246)',
+        },
+
+
+        head: {
+            display: 'flex',
+            flexDirection: 'row'
+
+        },
+        content: {
+            display: 'flex',
+            padding: '10px',
+            marginBottom: '10px',
+            borderRadius: '5px',
+            gap: '5px',
+            border: '1px solid rgb(251 191 36)',
         }
 
-        return formatMoney(amount * 520)
-
-    }
+    })
 
 
     return (
-        <Document style={{ width: '100%' }}>
-            <Page size={'A4'}>
+        <Document >
 
-                <Text>Resume</Text>
+            <Page size={'A4'} style={styles.page}>
 
-                <View className='md:p-6 '>
+                <Image src={logo} />
 
-                    <View className="bg-slate w-full shadow-2xl pt-4 px-4 md:px-8 shadow-indigo-900">
+                <Text style={{color: 'rgb(79 70 229)', textAlign: 'center',  fontWeight: 'bold', marginVertical: '20px'}}>Resume</Text>
 
-                        <View className='w-full text-center border border-amber-400 table-fixed border-collapse '>
+                <View>
 
-                            <View className='bg-amber-400'>
+                    {subjetctSelect.map(cuatrimestreData => (
 
-                                <View className=''>
-                                    <Text className='p-4 uppercase'> id </Text>
-                                    <Text className='p-4 uppercase'> Subject</Text>
-                                    <Text className='p-4 uppercase'>credit </Text>
-                                    <Text className='p-4 uppercase'>total</Text>
-                                </View>
+                        <View style={styles.content} key={cuatrimestreData.id} >
+
+                            <View style={{ display: "flex", flexDirection: "row", justifyContent: 'space-between' }}>
+                                <Text>{cuatrimestreData.id}</Text>
+                                <Text>{cuatrimestreData.name}</Text>
+                            </View>
+
+                            <View style={{ display: "flex", flexDirection: "row", justifyContent: 'space-between' }}>
+                                <Text>Credit: {cuatrimestreData.credito}</Text>
+                                <Text>{handleMoney(cuatrimestreData.credito, cuatrimestreData.id)}</Text>
 
                             </View>
 
-                            <View>
 
-                                {subjetctSelect.length > 0 ? (
 
-                                    subjetctSelect.map(cuatrimestreData => (
-
-                                        <View key={cuatrimestreData.id} className='hover:bg-amber-100 cursor-pointer'>
-                                            <Text>{cuatrimestreData.id}</Text>
-                                            <Text>{cuatrimestreData.name}</Text>
-                                            <Text>{cuatrimestreData.credito}</Text>
-                                            <Text>{handleMoney(cuatrimestreData.credito)}</Text>
-                                        </View>
-
-                                    ))
-
-                                ) : (
-
-                                    ''
-                                )
-                                }
-
-                                {/* Move totalMoney  under of each total  */}
-
-                                <View>
-                                    <Text className='text-center'> </Text>
-                                    <Text></Text>
-                                    <Text></Text>
-                                    <Text className='text text-center font-bold'>{formatMoney(total)}</Text>
-                                </View>
-                            </View>
                         </View>
+                    ))
+                    }
+                    {/* Move totalMoney  under of each total  */}
+
+                    <View>
+                        <Text style={{color: 'rgb(79 70 229)', textAlign: 'center',fontWeight: 'bold', marginVertical: '20px'}}>Total: {formatMoney(total)}</Text>
                     </View>
-                </View>
-            </Page>
-        </Document>
+                </View >
+            </Page >
+        </Document >
     )
 }
 

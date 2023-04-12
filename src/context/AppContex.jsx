@@ -4,21 +4,25 @@ import { toast } from "react-toastify";
 
 const AppContext = createContext();
 
-
 const AppProvider = ({ children }) => {
 
     const [data, setData] = useState([]);
+
     const [cuatrimestreActual, setCuatrimetreActual] = useState(1);
+
     const [cuatrimestre, setCuatrimestre] = useState([]);
-    const [subjetctSelect, setSubjectSelect] = useState([]);
-    const [maxCredit, setMaxCredit] = useState(0);
-    const [total, setTotal] = useState(0);
+
+    const [subjetctSelect, setSubjectSelect] = useState( JSON.parse(localStorage.getItem('subjectSelect')) ?? []);
+
+    const [maxCredit, setMaxCredit] = useState(+localStorage.getItem('maxCredit') ?? 0);
+
+    const [total, setTotal] = useState(+localStorage.getItem('total') ?? 0);
 
     useEffect(() => {
 
         const selectCuatrimetre = () => {
 
-            setCuatrimestre(data[cuatrimestreActual - 1])
+            setCuatrimestre(data[cuatrimestreActual - 1] ?? [])
         }
 
         selectCuatrimetre()
@@ -46,11 +50,11 @@ const AppProvider = ({ children }) => {
 
             setSubjectSelect(newSubjects)
 
+
             toast.info('DELETED SUCCESSFULLY')
 
             return
         }
-
 
         const response = handleCalcTotal(subject);
 
@@ -72,7 +76,7 @@ const AppProvider = ({ children }) => {
         //Know which subject is English, that must be 4000
 
         if (subject?.id.toLowerCase().split('-')[0].startsWith('ing')) {
-            
+
             setTotal(total + 4000);
 
         } else {
@@ -84,6 +88,19 @@ const AppProvider = ({ children }) => {
         return true
 
     }
+
+
+    // Keep states
+
+
+    useEffect(() => {
+        
+        const subjects =  JSON.stringify(subjetctSelect);
+        localStorage.setItem('subjectSelect', subjects);
+        localStorage.setItem('total', total);
+        localStorage.setItem('maxCredit', maxCredit)
+
+    }, [subjetctSelect])
 
     return (
         <AppContext.Provider

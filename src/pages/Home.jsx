@@ -1,14 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
 
-
-
 import useApp from "../hooks/useApp";
 import Table from "../components/Table";
 import Header from "../components/Header";
 import formatMoney from '../helpers/FormatMoney';
-import ResumePdf from '../components/ResumePdf';
-
 
 const Home = () => {
 
@@ -27,7 +23,6 @@ const Home = () => {
         }
 
         getData()
-
 
     }, []);
 
@@ -83,15 +78,11 @@ const Home = () => {
 
                     <Table />
 
-
                     <Link className='w-max block relative left-90' to={'/resume'}>
                         <img src="https://img.icons8.com/ios/50/null/arrow--v1.png" />
                     </Link>
 
-
-
                 </div >
-
             </main>
         </>
     )

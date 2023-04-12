@@ -7,17 +7,18 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom'
 
 //Pdf
-import { PDFViewer } from '@react-pdf/renderer';
+import { PDFViewer, PDFDownloadLink } from '@react-pdf/renderer';
 import ResumePdf from '../components/ResumePdf';
 
 
 function Resume() {
 
-  const { subjetctSelect, total, maxCredit } = useApp();
+  const { subjetctSelect, total } = useApp();
+  const [view, setView] = useState(false)
 
-  const handleMoney = amount => {
+  const handleMoney = (amount, id) => {
 
-    if (amount == 0) {
+    if (amount == 0 && id.split('-')[0].toLowerCase().startsWith('ing')) {
       return formatMoney(4000)
     }
 
@@ -26,15 +27,7 @@ function Resume() {
   }
 
   const handleViewPdf = () => {
-
-    return (
-
-      <PDFViewer>
-        <ResumePdf />
-      </PDFViewer>
-
-    )
-
+    setView(!view);
   }
 
 
@@ -69,7 +62,7 @@ function Resume() {
                     <td>{cuatrimestreData.id}</td>
                     <td>{cuatrimestreData.name}</td>
                     <td>{cuatrimestreData.credito}</td>
-                    <td>{handleMoney(cuatrimestreData.credito)}</td>
+                    <td>{handleMoney(cuatrimestreData.credito, cuatrimestreData.id)}</td>
                   </tr>
 
                 ))
@@ -102,6 +95,23 @@ function Resume() {
             </button>
 
           </div>
+
+          {view ? (
+
+
+            <PDFViewer style={{ width: '100%', height: '100vh', position: 'absolute', top: '0', right: '0' , bottom: '0' }}>
+              <ResumePdf subjetctSelect={subjetctSelect} total={total} />
+            </PDFViewer>
+
+
+          ) : null}
+
+
+
+         
+
+          
+
 
         </div>
       </main >

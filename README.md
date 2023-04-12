@@ -38,4 +38,7 @@ To use and practice with the project follow these steps
         </div >
 ```
 
+![image](https://user-images.githubusercontent.com/114118969/231546281-3ad9c750-a5d7-4cf3-87c9-f385ffc7b582.png)
+
+
 Made with :heart: by [aneudypq]()

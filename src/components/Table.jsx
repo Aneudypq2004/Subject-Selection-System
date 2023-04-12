@@ -38,7 +38,7 @@ function Table() {
             <th className='p-4 uppercase spa'> id </th>
             <th className='p-4 uppercase spa'> Subject</th>
             <th className='p-4 uppercase spa'>credit </th>
-            <th className='p-4 uppercase spa'>Pre-requisitos  </th>
+            <th className='p-4 uppercase pre'>prerequisites</th>
             <th className='p-4 uppercase spa'></th>
           </tr>
 
@@ -56,7 +56,7 @@ function Table() {
               <td>{cuatrimestreData.id}</td>
               <td>{cuatrimestreData.name}</td>
               <td>{cuatrimestreData.credito}</td>
-              <td>{cuatrimestreData['Pre-requisitos'] || '    '}</td>
+              <td className='pre'>{cuatrimestreData['Pre-requisitos'] || '    '}</td>
 
               <td>
 

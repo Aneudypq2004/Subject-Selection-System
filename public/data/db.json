@@ -47,6 +47,7 @@
         "Cuatrimestre 2": [
             {
                 "name": "Historia Dominicana",
+                "Pre-requisitos": "HIS-101",
                 "id": "HIS-102",
                 "credito": 3
             },
@@ -59,7 +60,7 @@
             {
                 "name": "Contabilidad Financiera",
                 "id": "TI-115",
-                "credito": 3,
+                "credito": 4,
                 "Pre-requisitos": "MAT-001"
             },
             {

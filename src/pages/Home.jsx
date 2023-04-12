@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom'
 
 
 
@@ -6,6 +7,7 @@ import useApp from "../hooks/useApp";
 import Table from "../components/Table";
 import Header from "../components/Header";
 import formatMoney from '../helpers/FormatMoney';
+import ResumePdf from '../components/ResumePdf';
 
 
 const Home = () => {
@@ -41,11 +43,11 @@ const Home = () => {
 
     return (
         <>
-            <Header />
+            <Header msg={'Subject Selection System'} />
 
             <main className='md:p-6 '>
 
-                <div className="bg-slate w-full shadow-2xl  shadow-indigo-900 p-4 md:p-8">
+                <div className="bg-slate w-full shadow-2xl  shadow-indigo-900 p-4 md:p-8 relative">
 
                     <div className='flex justify-between place-items-center'>
                         <select
@@ -69,7 +71,7 @@ const Home = () => {
                         <div className='relative grid place-items-center'>
                             <p className={`absolute opacity-0 hover:opacity-100 -top-6 bottom-0 left-0 right-0 font-bold uppercase transition-all duration-300`}>Credit</p>
                             <p className={`font-bold text-xl ${maxCredit >= 25 ? 'text-red-600' : ' text-indigo-600'}`}>
-                            {maxCredit}</p>
+                                {maxCredit}</p>
                         </div>
 
                         <div className='relative grid place-items-center'>
@@ -82,21 +84,15 @@ const Home = () => {
                     <Table />
 
 
-                    <a className='grid justify-end' href="/resume">{'-->'}</a>
+                    <Link className='w-max block relative left-90' to={'/resume'}>
+                        <img src="https://img.icons8.com/ios/50/null/arrow--v1.png" />
+                    </Link>
 
 
 
                 </div >
 
-
-
-
-
             </main>
-
-
-
-
         </>
     )
 }

@@ -6,3 +6,16 @@ td{
     padding: .5rem;
     border-bottom: 1px solid rgb(251 191 36 / 1);
 }
+
+
+@media screen and (max-width : 600px) {
+    .pre{
+        display: none;
+    }
+    
+}
+
+
+.left-90{
+    left: calc(100% - 4rem)
+}

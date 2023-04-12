@@ -72,7 +72,9 @@ const AppProvider = ({ children }) => {
         //Know which subject is English, that must be 4000
 
         if (subject?.id.toLowerCase().split('-')[0].startsWith('ing')) {
+            
             setTotal(total + 4000);
+
         } else {
             setTotal(total + (subject.credito * 520));
         }
